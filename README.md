@@ -1,0 +1,2 @@
+# Cats
+Bitcredit protocol specifications
