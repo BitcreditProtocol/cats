@@ -1,2 +1,2 @@
-# CATS: Credit And Trade Standard
+# CATS: Credit Asset Token Standard
 Bitcredit protocol specifications
