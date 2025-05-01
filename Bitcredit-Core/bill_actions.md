@@ -121,7 +121,9 @@ Once the bill is paid, no further actions can be done with it.
 
 #### Reject to Pay Bill
 
-The drawee can reject to pay the bill, if there is an active request to pay.
+The drawee can reject to pay the bill, if there is an active request to pay, or 
+if there was a request to pay before the maturity date that expired, but the bill payment
+deadline has not expired (end of maturity date + 2 working days).
 Once this happens, only recourse actions can be made on the bill.
 
 ## Buyer operations
