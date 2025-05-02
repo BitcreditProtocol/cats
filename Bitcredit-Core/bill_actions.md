@@ -62,9 +62,16 @@ If this deadline expires, the bill can only be recoursed from that point on.
 
 #### Request to Pay
 
-The holder of the bill can, after the maturity date is reached, request the bill to be paid, if it
-hasn't been paid, or requested to be paid before.
+The holder of the bill can request the bill to be paid, if it hasn't been paid,
+or requested to be paid before.
 The bill has to be paid within 2 working days, during which the bill is blocked until payment, rejection, or expiry.
+
+If the request to pay was done before the bill maturity date, it is blocked for 2 working days, but after expiration
+of the request, it just gets unblocked. The actual expiration is then 2 working days after the maturity date.
+
+If the request to pay was done after the bill maturity date, the deadline starts at the end of the day where the
+request to pay was made.
+
 If this deadline expires, the bill can only be recoursed from that point on.
 
 ### Recourse
@@ -114,7 +121,9 @@ Once the bill is paid, no further actions can be done with it.
 
 #### Reject to Pay Bill
 
-The drawee can reject to pay the bill, if there is an active request to pay.
+The drawee can reject to pay the bill, if there is an active request to pay, or 
+if there was a request to pay before the maturity date that expired, but the bill payment
+deadline has not expired (end of maturity date + 2 working days).
 Once this happens, only recourse actions can be made on the bill.
 
 ## Buyer operations
