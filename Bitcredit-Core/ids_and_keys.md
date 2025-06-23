@@ -57,4 +57,4 @@ We use [base58](https://docs.rs/bs58/latest/bs58/) to encode binary data and [sh
 
 ## Nostr
 
-Beyond the internal Ids, we also use Nostr npub's for our transport layer, which can be derived from the Secp256k1 public key.
+Beyond the internal Ids, we also use Nostr npubs for our transport layer, which can be derived from the Secp256k1 public key.
