@@ -76,19 +76,74 @@ If this deadline expires, the bill can only be recoursed from that point on.
 
 ### Recourse
 
+#### Recoursee
+
+A recourse is done from a *recourser* (the current holder of the bill) to a *recoursee*.
+The recoursee has to be a previous endorsee of the bill. This is calculated as follows:
+
+1. Collect all holders from the bill (ignoring Recourse blocks)
+   * For Issue blocks, the holder is the payee
+   * For Endorse blocks, the holder is the endorsee
+   * For Mint blocks, the holder is the mint
+   * For Sell blocks, the holder is the buyer
+2. Iterate the holders until the caller finds themselves as a holder, which means we found the first block where the caller was a holder and they can only recourse against holders that held it *before* them
+   * While iterating the holders, we add all holders before the caller's first holder block
+3. If the caller was never a holder in the bill (e.g. if they are drawer & drawee) - they can't recourse against anyone
+4. If the drawer is not the same as the drawee, the bill drawer can also be recoursed against
+5. The caller is removed from the list (one can't recourse against oneself)
+6. The list is sorted by timestamp of endorsement descending
+
+##### Examples
+
+###### Example 1
+
+Holders: Alice (Drawer & Drawee) -> Bob (Payee) -> Charly -> Dave -> Erin -> Charly
+
+Charly gets the following options:
+
+* Bob (Payee)
+
+If Charly wants to request to recourse, he can only recourse against holders before the first time holding the bill.
+
+###### Example 2
+
+Holders: Alice (Drawer) / Bob(Drawee) -> Dave (Payee) -> Charly -> Erin -> Charly
+
+Charly gets the following options:
+
+* Dave (Payee)
+* Alice (Drawer - because Drawer != Drawee)
+
+###### Example 3
+
+Holders: Alice (Drawer & Drawee) -> Bob (Payee) -> Dave -> Charly -> Erin -> Charly
+
+Charly gets the following options:
+
+* Bob (Payee)
+* Dave (Endorsee)
+
+###### Example 4
+
+Holders: Alice (Drawer & Drawee) -> Bob (Payee) -> Dave -> Charly -> Erin
+
+Erin gets the following options:
+
+* Bob (Payee)
+* Dave (Endorsee)
+* Charly (Endorsee)
+
 #### Request to Recourse for Accept
 
 If a bill has been rejected to be accepted, or acceptance expired, it can be recoursed for acceptance against a recoursee.
-The recoursee has to be a previous endorsee of the bill.
 Within 2 working days, the recoursee has to pay the recourser the given amount, which blocks the bill until payment, rejection, or expiry.
-If this deadline expires, the bill is permanently blocked and can only be resolved in court.
+If this deadline expires, the bill is unblocked again and can be requested to recourse again
 
 #### Request to Recourse for Payment
 
 If a bill has been rejected to be paid, or payment expired, it can be recoursed for payment against a recoursee.
-The recoursee has to be a previous endorsee of the bill.
 Within 2 working days, the recoursee has to pay the recourser the given amount, which blocks the bill until payment, rejection, or expiry.
-If this deadline expires, the bill is permanently blocked and can only be resolved in court.
+If this deadline expires, the bill is unblocked again and can be requested to recourse again
 
 #### Recourse
 
