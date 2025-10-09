@@ -38,12 +38,13 @@ the new holder of the bill.
 #### Offer To Sell
 
 The holder (seller) can offer a bill for sale to a given buyer for a given price.
-The offer is valid for 2 working days during which the bill is blocked until payment, rejection, or expiry.
+The seller defines a deadline for the sale, which is at minimum, the UTC end of the same day.
+The offer is valid until this deadline, during which the bill is blocked until payment, rejection, or expiry.
 If the deadline expires, the offer to sell is invalidated and the bill is unblocked.
 
 ##### Sell
 
-If the buyer of an active offer to sell pays within two working days, the bill is
+If the buyer of an active offer to sell pays within the deadline, the bill is
 endorsed to the buyer.
 
 #### Minting
@@ -57,20 +58,21 @@ The holder can then accept the quote, which endorses the bill to the Mint.
 
 The holder can request the drawee to accept the bill if it hasn't been requested to accept,
 or accepted before.
-It has to be accepted within 2 working days.
+The holder sets a deadline for the acceptance, which has to be at minimum the UTC end-of-day of the time of request + 48 hours
 If this deadline expires, the bill can only be recoursed from that point on.
 
 #### Request to Pay
 
 The holder of the bill can request the bill to be paid, if it hasn't been paid,
 or requested to be paid before.
-The bill has to be paid within 2 working days, during which the bill is blocked until payment, rejection, or expiry.
+The bill has to be paid within the deadline, during which the bill is blocked until payment, rejection, or expiry.
 
-If the request to pay was done before the bill maturity date, it is blocked for 2 working days, but after expiration
-of the request, it just gets unblocked. The actual expiration is then 2 working days after the maturity date.
+The holder sets a deadline for the payment, which has to be at minimum the UTC end-of-day of the time of request + 48 hours
 
-If the request to pay was done after the bill maturity date, the deadline starts at the end of the day where the
-request to pay was made.
+If the request to pay was done before the bill maturity date, it is blocked until the deadline, but after expiration
+of the request, it just gets unblocked. The actual expiration is then 48 hours after the maturity date at UTC end-of-day.
+
+If the request to pay was done after the bill maturity date, the deadline is just the one the requester made.
 
 If this deadline expires, the bill can only be recoursed from that point on.
 
@@ -136,13 +138,17 @@ Erin gets the following options:
 #### Request to Recourse for Accept
 
 If a bill has been rejected to be accepted, or acceptance expired, it can be recoursed for acceptance against a recoursee.
-Within 2 working days, the recoursee has to pay the recourser the given amount, which blocks the bill until payment, rejection, or expiry.
+
+The holder sets a deadline for the recourse, which has to be at minimum the UTC end-of-day of the time of request + 48 hours
+Until this deadline, the recoursee has to pay the recourser the given amount, which blocks the bill until payment, rejection, or expiry.
 If this deadline expires, the bill is unblocked again and can be requested to recourse again
 
 #### Request to Recourse for Payment
 
 If a bill has been rejected to be paid, or payment expired, it can be recoursed for payment against a recoursee.
-Within 2 working days, the recoursee has to pay the recourser the given amount, which blocks the bill until payment, rejection, or expiry.
+
+The holder sets a deadline for the recourse, which has to be at minimum the UTC end-of-day of the time of request + 48 hours
+Until this deadline, the recoursee has to pay the recourser the given amount, which blocks the bill until payment, rejection, or expiry.
 If this deadline expires, the bill is unblocked again and can be requested to recourse again
 
 #### Recourse
@@ -178,7 +184,7 @@ Once the bill is paid, no further actions can be done with it.
 
 The drawee can reject to pay the bill, if there is an active request to pay, or 
 if there was a request to pay before the maturity date that expired, but the bill payment
-deadline has not expired (end of maturity date + 2 working days).
+deadline has not expired.
 Once this happens, only recourse actions can be made on the bill.
 
 ## Buyer operations
