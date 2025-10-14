@@ -36,6 +36,11 @@ Data validation (e.g. valid NodeIds, valid dates and currencies) are not part of
 
 ### General Conditions & Terms
 
+These are *very* important to understand the validation, since they concern all actions and are referenced in the validation conditions below.
+
+E.g. for `RequestToPay`, the only condition is, that none of the following general conditions apply, which means, you can't `RequestToPay` if the bill was **requested to pay** before, although that's not explicitly spelled out.
+The reason for this is, that `RequestToPay` can only be resolved by payment (**paid**), expiration or rejecting (**only recoursable**), which lead to one of the general conditions becoming true and hence would block another attempt to `RequestToPay`.
+
 * **paid** - If the bill is paid - no further actions can be taken by any participant
 * **recoursed to the end** - If the bill was recoursed to the end (i.e. the current holder does not have past endorsees to recourse against) - no further actions can be taken by any participant
 * **only recoursable** - If the bill was rejected to pay, rejected to accept, payment expired, or acceptance expired - the only actions that can be taken from this point are `RequestRecourse`, `Recourse`, `RejectToPayRecourse`
