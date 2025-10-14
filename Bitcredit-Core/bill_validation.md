@@ -59,6 +59,7 @@ The action can only be executed by the bill issuer.
 #### Conditions
 
 * The issuer can't be anonymous
+* The payer can't be anonymous
 * The payer can't be the payee at time of issue
 
 ### Holder Operations
@@ -179,6 +180,6 @@ The action can only be executed by the recoursee. (i.e. the `recoursee` in the l
 
 ### Special Case - Holder == Payer
 
-* If the holder is the payer at the same time (e.g. because the bill was endorsed back to the payer), they can do both **Holder Operations** and **Payer Operations**
-* e.g. they can both `RequestToAccept` and then `Accept` the bill
+* If the holder is the payer at the same time (e.g. because the bill was endorsed back to the payer), he can do both **Holder Operations** and **Payer Operations**
+* e.g. he can both `RequestToAccept` and then `Accept` the bill
 
