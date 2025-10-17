@@ -88,12 +88,13 @@ The recoursee has to be a previous endorsee of the bill. This is calculated as f
    * For Endorse blocks, the holder is the endorsee
    * For Mint blocks, the holder is the mint
    * For Sell blocks, the holder is the buyer
-2. Iterate the holders until the caller finds themselves as a holder, which means we found the first block where the caller was a holder and they can only recourse against holders that held it *before* them
+2. Iterate the holders until the caller finds themselves as a holder or drawee, which means we found the first block where the caller was a holder and they can only recourse against holders that held it *before* them
    * While iterating the holders, we add all holders before the caller's first holder block
 3. If the caller was never a holder in the bill (e.g. if they are drawer & drawee) - they can't recourse against anyone
 4. If the drawer is not the same as the drawee, the bill drawer can also be recoursed against
 5. The caller is removed from the list (one can't recourse against oneself)
-6. The list is sorted by timestamp of endorsement descending
+6. The drawee is removed from the list (the drawee already rejected - otherwise no recourse would even happen, so recourse against them doesn't make sense)
+7. The list is sorted by timestamp of endorsement descending
 
 ##### Examples
 
