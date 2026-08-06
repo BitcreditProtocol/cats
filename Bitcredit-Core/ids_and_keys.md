@@ -14,6 +14,7 @@ the Id was created in. It uses the following mapping:
 * t => Testnet
 * T => Testnet4
 * r => Regtest
+* s => Signet
 
 ### NodeId
 
